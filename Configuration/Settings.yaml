@@ -5,9 +5,13 @@
 Flowpack:
   SingleSignOn:
     Server:
+      # Server configuration
       server:
+        # The service base URI for this server
         serviceBaseUri: ''
+        # Mandatory key pair uuid (fingerprint) for the SSO server
         keyPairFingerprint: ''
+
       log:
         backend: Neos\Flow\Log\Backend\FileBackend
         backendOptions:
@@ -17,9 +21,12 @@ Flowpack:
           maximumLogFileSize: 10485760
           logFilesToKeep: 1
           logMessageOrigin: false
+
+        # Enable logging of request signing (all signed requests)
         logRequestSigning: false
       accountMapper:
         configuration: null
+
 Neos:
   Flow:
     security:
@@ -37,6 +44,7 @@ Neos:
                   patternValue:
                     resolverType: Flowpack\SingleSignOn\Server\Security\RequestPattern\SsoClientPublicKeyResolver
             interceptor: AccessDeny
+
     object:
       excludeClasses:
         mockery.mockery:

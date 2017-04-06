@@ -3,18 +3,23 @@ Flowpack:
   SingleSignOn:
     Server:
       server:
+        # Fixtures for functional tests
         keyPairFingerprint: bb5abb57faa122cc031e3c904db3d751
         serviceBaseUri: 'http://ssoserver/test/sso'
       log:
         backend: Neos\Flow\Log\Backend\NullBackend
+
     Client:
       client:
+        # Fixtures for functional tests
         serviceBaseUri: 'http://ssoclient/sso'
         publicKeyFingerprint: bb45dfda9f461c22cfdd6bbb0a252d8e
       server:
         TestServer:
+          # Fixtures for functional tests
           publicKeyFingerprint: bb5abb57faa122cc031e3c904db3d751
           serviceBaseUri: 'http://ssoserver/test/sso'
+
 Neos:
   Flow:
     security:
