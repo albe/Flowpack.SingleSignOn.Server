@@ -1,2 +1,2 @@
 Flowpack_SingleSignOn_Server_AccessToken_Storage:
-  backend: Neos\Flow\Cache\Backend\FileBackend
+  backend: Neos\Cache\Backend\FileBackend

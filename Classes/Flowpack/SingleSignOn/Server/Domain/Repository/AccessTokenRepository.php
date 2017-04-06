@@ -19,7 +19,7 @@ class AccessTokenRepository {
 	 * Storage cache used by access tokens
 	 *
 	 * @Flow\Inject
-	 * @var \Neos\Flow\Cache\Frontend\VariableFrontend
+	 * @var \Neos\Cache\Frontend\VariableFrontend
 	 */
 	protected $cache;
 
