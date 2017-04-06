@@ -6,24 +6,24 @@ namespace Flowpack\SingleSignOn\Server\Tests\Unit\Domain\Model;
  *                                                                        *
  *                                                                        */
 
-use TYPO3\Flow\Http\Uri;
+use Neos\Flow\Http\Uri;
 use \Mockery as m;
 
 /**
  * Unit test for SsoServer
  */
-class SsoServerTest extends \TYPO3\Flow\Tests\UnitTestCase {
+class SsoServerTest extends \Neos\Flow\Tests\UnitTestCase {
 
 	/**
 	 * @test
 	 */
 	public function verifyAuthenticationRequestRemovesSignatureAndCsrfTokenFromUri() {
 		$endpointUri = new Uri('http://ssoserver/sso/authentication?foo=bar&callbackUri=abc&clientIdentifier=client-01&signature=xyz&__csrfToken=123');
-		$request = \TYPO3\Flow\Http\Request::create($endpointUri);
+		$request = \Neos\Flow\Http\Request::create($endpointUri);
 
 		$ssoServer = new \Flowpack\SingleSignOn\Server\Domain\Model\SsoServer();
 
-		$rsaWalletService = m::mock('TYPO3\Flow\Security\Cryptography\RsaWalletServiceInterface');
+		$rsaWalletService = m::mock('Neos\Flow\Security\Cryptography\RsaWalletServiceInterface');
 		$this->inject($ssoServer, 'rsaWalletService', $rsaWalletService);
 
 		$ssoClient = m::mock('Flowpack\SingleSignOn\Server\Domain\Model\SsoClient', array(
@@ -49,7 +49,7 @@ class SsoServerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 		$ssoServer = new \Flowpack\SingleSignOn\Server\Domain\Model\SsoServer();
 
-		$rsaWalletService = m::mock('TYPO3\Flow\Security\Cryptography\RsaWalletServiceInterface');
+		$rsaWalletService = m::mock('Neos\Flow\Security\Cryptography\RsaWalletServiceInterface');
 		$this->inject($ssoServer, 'rsaWalletService', $rsaWalletService);
 
 		$ssoClient = m::mock('Flowpack\SingleSignOn\Server\Domain\Model\SsoClient', array(
@@ -83,13 +83,13 @@ class SsoServerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function createAccessTokenSetsSessionId() {
 		$ssoServer = new \Flowpack\SingleSignOn\Server\Domain\Model\SsoServer();
 
-		$mockSession = m::mock('TYPO3\Flow\Session\FlowSession', array(
+		$mockSession = m::mock('Neos\Flow\Session\FlowSession', array(
 			'getId' => 'session-id'
 		));
 		$this->inject($ssoServer, 'session', $mockSession);
 
 		$ssoClient = m::mock('Flowpack\SingleSignOn\Server\Domain\Model\SsoClient');
-		$account = m::mock('TYPO3\Flow\Security\Account');
+		$account = m::mock('Neos\Flow\Security\Account');
 		$accessToken = $ssoServer->createAccessToken($ssoClient, $account);
 
 		$this->assertEquals('session-id', $accessToken->getSessionId());

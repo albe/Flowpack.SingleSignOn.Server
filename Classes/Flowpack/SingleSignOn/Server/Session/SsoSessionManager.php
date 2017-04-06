@@ -5,8 +5,8 @@ namespace Flowpack\SingleSignOn\Server\Session;
  * This script belongs to the TYPO3 Flow package "Flowpack.SingleSignOn.Server". *
  *                                                                               */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Session\SessionInterface;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Session\SessionInterface;
 
 /**
  * Single sign-on session manager
@@ -34,11 +34,11 @@ class SsoSessionManager {
 	protected $ssoServerFactory;
 
 	/**
-	 * @param \TYPO3\Flow\Session\SessionInterface $session
+	 * @param \Neos\Flow\Session\SessionInterface $session
 	 * @param \Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient
 	 * @return void
 	 */
-	public function registerSsoClient(\TYPO3\Flow\Session\SessionInterface $session, \Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient) {
+	public function registerSsoClient(\Neos\Flow\Session\SessionInterface $session, \Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient) {
 		$registeredClients = $session->getData('Flowpack_SingleSignOn_Clients');
 		if (!is_array($registeredClients)) {
 			$registeredClients = array();
@@ -48,10 +48,10 @@ class SsoSessionManager {
 	}
 
 	/**
-	 * @param \TYPO3\Flow\Session\SessionInterface $session
+	 * @param \Neos\Flow\Session\SessionInterface $session
 	 * @return array Array of \Flowpack\SingleSignOn\Server\Domain\Model\SsoClient
 	 */
-	public function getRegisteredSsoClients(\TYPO3\Flow\Session\SessionInterface $session) {
+	public function getRegisteredSsoClients(\Neos\Flow\Session\SessionInterface $session) {
 		$registeredClients = $session->getData('Flowpack_SingleSignOn_Clients');
 		if (!is_array($registeredClients)) {
 			$registeredClients = array();
@@ -66,7 +66,7 @@ class SsoSessionManager {
 	/**
 	 * Destroy the given session on registered SSO clients
 	 *
-	 * @param \TYPO3\Flow\Session\SessionInterface $session
+	 * @param \Neos\Flow\Session\SessionInterface $session
 	 * @return void
 	 */
 	public function destroyRegisteredSsoClientSessions(SessionInterface $session) {

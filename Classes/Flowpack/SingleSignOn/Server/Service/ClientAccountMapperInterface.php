@@ -5,7 +5,7 @@ namespace Flowpack\SingleSignOn\Server\Service;
  * This script belongs to the TYPO3 Flow package "Flowpack.SingleSignOn.Server". *
  *                                                                               */
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 
 /**
  * Interface for a mapper service that maps the globally authenticated account
@@ -17,9 +17,9 @@ interface ClientAccountMapperInterface {
 	 * Map the given account as account data for an instance
 	 *
 	 * @param \Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient
-	 * @param \TYPO3\Flow\Security\Account $account
+	 * @param \Neos\Flow\Security\Account $account
 	 * @return array
 	 */
-	public function getAccountData(\Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient, \TYPO3\Flow\Security\Account $account);
+	public function getAccountData(\Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient, \Neos\Flow\Security\Account $account);
 
 }

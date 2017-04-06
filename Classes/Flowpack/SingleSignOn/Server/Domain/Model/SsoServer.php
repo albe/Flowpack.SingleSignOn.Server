@@ -5,8 +5,8 @@ namespace Flowpack\SingleSignOn\Server\Domain\Model;
  * This script belongs to the TYPO3 Flow package "Flowpack.SingleSignOn.Server". *
  *                                                                               */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Http\Uri;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Http\Uri;
 
 /**
  * SSO server
@@ -29,13 +29,13 @@ class SsoServer {
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Security\Cryptography\RsaWalletServiceInterface
+	 * @var \Neos\Flow\Security\Cryptography\RsaWalletServiceInterface
 	 */
 	protected $rsaWalletService;
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Session\SessionInterface
+	 * @var \Neos\Flow\Session\SessionInterface
 	 */
 	protected $session;
 
@@ -46,12 +46,12 @@ class SsoServer {
 	 * the signature argument and a possible CSRF token.
 	 *
 	 * @param \Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient
-	 * @param \TYPO3\Flow\Http\Request $request The original authentication endpoint request
+	 * @param \Neos\Flow\Http\Request $request The original authentication endpoint request
 	 * @param string $argumentName Argument name of the signature argument (defaults to "signature")
 	 * @param string $signature Base64 encoded signature of the URI with arguments (excluding the signature argument)
 	 * @return boolean
 	 */
-	public function verifyAuthenticationRequest(SsoClient $ssoClient, \TYPO3\Flow\Http\Request $request, $argumentName, $signature) {
+	public function verifyAuthenticationRequest(SsoClient $ssoClient, \Neos\Flow\Http\Request $request, $argumentName, $signature) {
 		$uri = clone $request->getUri();
 		$arguments = $uri->getArguments();
 		unset($arguments[$argumentName]);
@@ -73,7 +73,7 @@ class SsoServer {
 	 * @param \Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient
 	 * @param \Flowpack\SingleSignOn\Server\Domain\Model\AccessToken $accessToken
 	 * @param string $callbackUri
-	 * @return \TYPO3\Flow\Http\Uri
+	 * @return \Neos\Flow\Http\Uri
 	 */
 	public function buildCallbackRedirectUri(SsoClient $ssoClient, AccessToken $accessToken, $callbackUri) {
 		$accessTokenCipher = $this->rsaWalletService->encryptWithPublicKey($accessToken->getIdentifier(), $ssoClient->getPublicKey());
@@ -95,10 +95,10 @@ class SsoServer {
 	 * The access token allows the client to get authentication details and transfer the session id.
 	 *
 	 * @param \Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient
-	 * @param \TYPO3\Flow\Security\Account $account
+	 * @param \Neos\Flow\Security\Account $account
 	 * @return \Flowpack\SingleSignOn\Server\Domain\Model\AccessToken
 	 */
-	public function createAccessToken(SsoClient $ssoClient, \TYPO3\Flow\Security\Account $account) {
+	public function createAccessToken(SsoClient $ssoClient, \Neos\Flow\Security\Account $account) {
 		$accessToken = new \Flowpack\SingleSignOn\Server\Domain\Model\AccessToken();
 		$accessToken->setAccount($account);
 		$accessToken->setExpiryTime(time() + \Flowpack\SingleSignOn\Server\Domain\Model\AccessToken::DEFAULT_VALIDITY_TIME);

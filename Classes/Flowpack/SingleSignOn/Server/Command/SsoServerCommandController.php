@@ -7,8 +7,8 @@ namespace Flowpack\SingleSignOn\Server\Command;
  *                                                                        */
 
 use Flowpack\SingleSignOn\Server\Domain\Model\SsoClient;
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Cli\CommandController;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Cli\CommandController;
 
 /**
  * Command controller of the SSO Server
@@ -31,7 +31,7 @@ class SsoServerCommandController extends CommandController {
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Security\Cryptography\RsaWalletServiceInterface
+	 * @var \Neos\Flow\Security\Cryptography\RsaWalletServiceInterface
 	 */
 	protected $rsaWalletService;
 
@@ -47,7 +47,7 @@ class SsoServerCommandController extends CommandController {
 	public function registerClientCommand($baseUri, $publicKey) {
 		try {
 			$this->rsaWalletService->getPublicKey($publicKey);
-		} catch(\TYPO3\Flow\Security\Exception\InvalidKeyPairIdException $exception) {
+		} catch(\Neos\Flow\Security\Exception\InvalidKeyPairIdException $exception) {
 			$this->outputLine('Invalid or unknown public key fingerprint: ' . $publicKey . '. Make sure to import the key before adding the client.');
 		}
 

@@ -5,7 +5,7 @@ namespace Flowpack\SingleSignOn\Server\Domain\Service;
  * This script belongs to the TYPO3 Flow package "Flowpack.SingleSignOn.Server". *
  *                                                                               */
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 
 /**
  * A notification strategy for SSO clients that runs in parallel
@@ -46,9 +46,9 @@ class ParallelSsoClientNotifier implements SsoClientNotifierInterface {
 		$responses = $this->requestEngine->sendRequests($requests);
 
 		foreach ($responses as $index => $response) {
-			if ($response instanceof \TYPO3\Flow\Http\Exception) {
+			if ($response instanceof \Neos\Flow\Http\Exception) {
 				$this->ssoLogger->log($response->getMessage(), LOG_WARNING);
-			} elseif ($response instanceof \TYPO3\Flow\Http\Response) {
+			} elseif ($response instanceof \Neos\Flow\Http\Response) {
 				if ($response->getStatusCode() === 404 && $response->getHeader('Content-Type') === 'application/json') {
 					$data = json_decode($response->getContent(), TRUE);
 						// Ignore unknown sessions, could be expired on client

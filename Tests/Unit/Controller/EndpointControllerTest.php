@@ -11,7 +11,7 @@ use \Mockery as m;
 /**
  * Unit test for EndpointController
  */
-class EndpointControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
+class EndpointControllerTest extends \Neos\Flow\Tests\UnitTestCase {
 
 	/**
 	 * @test
@@ -20,7 +20,7 @@ class EndpointControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function authenticateActionWithUnknownClientIdentifierThrowsException() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\EndpointController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
 		$mockSsoClientRepository = m::mock('Flowpack\SingleSignOn\Server\Domain\Repository\SsoClientRepository', array(
 			'findByIdentifier' => NULL
@@ -37,12 +37,12 @@ class EndpointControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function authenticateActionWithInvalidSignatureThrowsException() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\EndpointController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
-		$mockHttpRequest = m::mock('TYPO3\Flow\Http\Request', array(
+		$mockHttpRequest = m::mock('Neos\Flow\Http\Request', array(
 			'getUri' => 'http://test/'
 		));
-		$mockRequest = m::mock('TYPO3\Flow\Mvc\ActionRequest', array(
+		$mockRequest = m::mock('Neos\Flow\Mvc\ActionRequest', array(
 			'getHttpRequest' => $mockHttpRequest
 		));
 		$this->inject($controller, 'request', $mockRequest);
@@ -64,17 +64,17 @@ class EndpointControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	/**
 	 * @test
-	 * @expectedException \TYPO3\Flow\Mvc\Exception\StopActionException
+	 * @expectedException \Neos\Flow\Mvc\Exception\StopActionException
 	 */
 	public function authenticateActionWithValidSignatureAuthenticatesLocallyAndRedirectsBack() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\EndpointController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
-		$mockHttpRequest = m::mock('TYPO3\Flow\Http\Request', array(
+		$mockHttpRequest = m::mock('Neos\Flow\Http\Request', array(
 			'getUri' => 'http://test/'
 		));
-		$mockRequest = m::mock('TYPO3\Flow\Mvc\ActionRequest', array(
+		$mockRequest = m::mock('Neos\Flow\Mvc\ActionRequest', array(
 			'getHttpRequest' => $mockHttpRequest
 		));
 		$this->inject($controller, 'request', $mockRequest);
@@ -91,11 +91,11 @@ class EndpointControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 			'create' => $mockSsoServer
 		));
 		$this->inject($controller, 'ssoServerFactory', $mockSsoServerFactory);
-		$mockAuthenticationManager = m::mock('TYPO3\Flow\Security\Authentication\AuthenticationManagerInterface', array(
+		$mockAuthenticationManager = m::mock('Neos\Flow\Security\Authentication\AuthenticationManagerInterface', array(
 			'isAuthenticated' => TRUE
 		));
 		$this->inject($controller, 'authenticationManager', $mockAuthenticationManager);
-		$mockAccount = m::mock('TYPO3\Flow\Security\Account');
+		$mockAccount = m::mock('Neos\Flow\Security\Account');
 		$mockAccountManager = m::mock('Flowpack\SingleSignOn\Server\Service\AccountManager', array(
 			'getClientAccount' => $mockAccount
 		));

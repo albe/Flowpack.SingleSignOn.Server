@@ -2,7 +2,7 @@ Flowpack\SingleSignOn\Server\Domain\Repository\AccessTokenRepository:
   properties:
     cache:
       object:
-        factoryObjectName: TYPO3\Flow\Cache\CacheManager
+        factoryObjectName: Neos\Flow\Cache\CacheManager
         factoryMethodName: getCache
         arguments:
           1:
@@ -14,12 +14,12 @@ Flowpack\SingleSignOn\Server\Domain\Service\SsoClientNotifierInterface:
 
 Flowpack\SingleSignOn\Server\Log\SsoLoggerInterface:
   scope: singleton
-  factoryObjectName: TYPO3\Flow\Log\LoggerFactory
+  factoryObjectName: Neos\Flow\Log\LoggerFactory
   arguments:
     1:
       value: 'SingleSignOn_Server'
     2:
-      value: 'TYPO3\Flow\Log\Logger'
+      value: 'Neos\Flow\Log\Logger'
     3:
       setting: Flowpack.SingleSignOn.Server.log.backend
     4:
@@ -30,7 +30,7 @@ Flowpack\SingleSignOn\Server\Domain\Service\ParallelSsoClientNotifier:
     requestEngine:
       object:
         name: Flowpack\SingleSignOn\Server\Http\MultiCurlEngine
-        name: TYPO3\Flow\Http\Client\CurlEngine
+        name: Neos\Flow\Http\Client\CurlEngine
         properties:
           timeout:
             value: 10

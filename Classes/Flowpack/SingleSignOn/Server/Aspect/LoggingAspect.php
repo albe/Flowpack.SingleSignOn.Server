@@ -5,8 +5,8 @@ namespace Flowpack\SingleSignOn\Server\Aspect;
  * This script belongs to the TYPO3 Flow package "Flowpack.SingleSignOn.Server". *
  *                                                                               */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Aop\JoinPointInterface;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Aop\JoinPointInterface;
 
 /**
  * An aspect which logs SSO relevant actions

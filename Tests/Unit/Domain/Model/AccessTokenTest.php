@@ -9,7 +9,7 @@ namespace Flowpack\SingleSignOn\Server\Tests\Unit\Domain\Model;
 /**
  * Unit test for AccessToken
  */
-class AccessTokenTest extends \TYPO3\Flow\Tests\UnitTestCase {
+class AccessTokenTest extends \Neos\Flow\Tests\UnitTestCase {
 
 	/**
 	 * @test

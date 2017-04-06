@@ -6,14 +6,14 @@ namespace Flowpack\SingleSignOn\Server\Tests\Functional\Controller;
  *                                                                        *
  *                                                                        */
 
-use \TYPO3\Flow\Http\Request;
-use \TYPO3\Flow\Http\Response;
-use \TYPO3\Flow\Http\Uri;
+use \Neos\Flow\Http\Request;
+use \Neos\Flow\Http\Response;
+use \Neos\Flow\Http\Uri;
 
 /**
  * Access token controller functional test
  */
-class AccessTokenControllerTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
+class AccessTokenControllerTest extends \Neos\Flow\Tests\FunctionalTestCase {
 
 	protected $testableHttpEnabled = TRUE;
 
@@ -35,7 +35,7 @@ class AccessTokenControllerTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
 	protected $accessTokenRepository;
 
 	/**
-	 * @var \TYPO3\Flow\Security\Cryptography\RsaWalletServiceInterface
+	 * @var \Neos\Flow\Security\Cryptography\RsaWalletServiceInterface
 	 */
 	protected $rsaWalletService;
 
@@ -46,7 +46,7 @@ class AccessTokenControllerTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
 		parent::setUp();
 		$this->serverSsoServer = $this->objectManager->get('Flowpack\SingleSignOn\Server\Domain\Factory\SsoServerFactory')->create();
 		$this->accessTokenRepository = $this->objectManager->get('Flowpack\SingleSignOn\Server\Domain\Repository\AccessTokenRepository');
-		$this->rsaWalletService = $this->objectManager->get('TYPO3\Flow\Security\Cryptography\RsaWalletServiceInterface');
+		$this->rsaWalletService = $this->objectManager->get('Neos\Flow\Security\Cryptography\RsaWalletServiceInterface');
 	}
 
 	/**
@@ -59,7 +59,7 @@ class AccessTokenControllerTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
 
 		$requestSigner = $this->objectManager->get('Flowpack\SingleSignOn\Client\Security\RequestSigner');
 
-		$account = new \TYPO3\Flow\Security\Account();
+		$account = new \Neos\Flow\Security\Account();
 		$account->setAccountIdentifier('testuser');
 		$account->setRoles(array('User'));
 		$account->setAuthenticationProviderName('SingleSignOn');

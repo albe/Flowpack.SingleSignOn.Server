@@ -6,7 +6,7 @@ namespace Flowpack\SingleSignOn\Server\Domain\Repository;
  *                                                                               */
 
 use Flowpack\SingleSignOn\Server\Domain\Model\AccessToken;
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 
 /**
  * A repository for AccessTokens
@@ -19,7 +19,7 @@ class AccessTokenRepository {
 	 * Storage cache used by access tokens
 	 *
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Cache\Frontend\VariableFrontend
+	 * @var \Neos\Flow\Cache\Frontend\VariableFrontend
 	 */
 	protected $cache;
 

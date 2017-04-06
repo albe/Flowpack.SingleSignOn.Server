@@ -5,15 +5,15 @@ namespace Flowpack\SingleSignOn\Server\Http;
  * This script belongs to the TYPO3 Flow package "Flowpack.SingleSignOn.Server". *
  *                                                                               */
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 
-use TYPO3\Flow\Http\Request,
-	TYPO3\Flow\Http\Response;
+use Neos\Flow\Http\Request,
+	Neos\Flow\Http\Response;
 
 /**
  * A multi-exec capable cURL request engine
  */
-class MultiCurlEngine implements \TYPO3\Flow\Http\Client\RequestEngineInterface {
+class MultiCurlEngine implements \Neos\Flow\Http\Client\RequestEngineInterface {
 
 	/**
 	 * Timeout in seconds (CURLOPT_TIMEOUT)
@@ -24,11 +24,11 @@ class MultiCurlEngine implements \TYPO3\Flow\Http\Client\RequestEngineInterface 
 	/**
 	 * Sends a single HTTP request
 	 *
-	 * @param \TYPO3\Flow\Http\Request $request
-	 * @return \TYPO3\Flow\Http\Response
-	 * @throws \TYPO3\Flow\Http\Exception
+	 * @param \Neos\Flow\Http\Request $request
+	 * @return \Neos\Flow\Http\Response
+	 * @throws \Neos\Flow\Http\Exception
 	 */
-	public function sendRequest(\TYPO3\Flow\Http\Request $request) {
+	public function sendRequest(\Neos\Flow\Http\Request $request) {
 		$responses = $this->sendRequests(array($request));
 		if (isset($responses[0])) {
 			return $responses[0];
@@ -40,12 +40,12 @@ class MultiCurlEngine implements \TYPO3\Flow\Http\Client\RequestEngineInterface 
 	/**
 	 * Sends multiple request in parallel
 	 *
-	 * @param array $requests Array of \TYPO3\Flow\Http\Request
-	 * @return array Array of \TYPO3\Flow\Http\Response or \TYPO3\Flow\Http\Exception if an exception occured during a request
+	 * @param array $requests Array of \Neos\Flow\Http\Request
+	 * @return array Array of \Neos\Flow\Http\Response or \Neos\Flow\Http\Exception if an exception occured during a request
 	 */
 	public function sendRequests(array $requests) {
 		if (!extension_loaded('curl')) {
-			throw new \TYPO3\Flow\Http\Exception('CurlEngine requires the PHP CURL extension to be installed and loaded.', 1346319808);
+			throw new \Neos\Flow\Http\Exception('CurlEngine requires the PHP CURL extension to be installed and loaded.', 1346319808);
 		}
 
 		$multiCurl = curl_multi_init();

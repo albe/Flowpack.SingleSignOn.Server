@@ -5,7 +5,7 @@ namespace Flowpack\SingleSignOn\Server\Controller;
  * This script belongs to the TYPO3 Flow package "Flowpack.SingleSignOn.Server". *
  *                                                                               */
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use Flowpack\SingleSignOn\Server\Exception;
 use Flowpack\SingleSignOn\Server\Exception\ClientNotFoundException;
 use Flowpack\SingleSignOn\Server\Exception\SignatureVerificationFailedException;
@@ -21,7 +21,7 @@ use Flowpack\SingleSignOn\Server\Exception\SignatureVerificationFailedException;
  *
  * @Flow\Scope("singleton")
  */
-class EndpointController extends \TYPO3\Flow\Mvc\Controller\ActionController {
+class EndpointController extends \Neos\Flow\Mvc\Controller\ActionController {
 
 	/**
 	 * @Flow\Inject
@@ -43,7 +43,7 @@ class EndpointController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Security\Authentication\AuthenticationManagerInterface
+	 * @var \Neos\Flow\Security\Authentication\AuthenticationManagerInterface
 	 */
 	protected $authenticationManager;
 

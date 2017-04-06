@@ -6,9 +6,9 @@ namespace Flowpack\SingleSignOn\Server\Controller;
  *                                                                               */
 
 use Flowpack\SingleSignOn\Server\Domain\Model\AccessToken;
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use Flowpack\SingleSignOn\Server\Exception;
-use TYPO3\Flow\Mvc\Controller\ActionController;
+use Neos\Flow\Mvc\Controller\ActionController;
 
 /**
  * Access token management controller
@@ -34,7 +34,7 @@ class AccessTokenController extends ActionController {
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Session\SessionManagerInterface
+	 * @var \Neos\Flow\Session\SessionManagerInterface
 	 */
 	protected $sessionManager;
 
@@ -53,7 +53,7 @@ class AccessTokenController extends ActionController {
 	/**
 	 * @var string
 	 */
-	protected $defaultViewObjectName = 'TYPO3\Flow\Mvc\View\JsonView';
+	protected $defaultViewObjectName = 'Neos\Flow\Mvc\View\JsonView';
 
 	/**
 	 * @var array
@@ -117,7 +117,7 @@ class AccessTokenController extends ActionController {
 	/**
 	 * Test if the given session is active and not expired
 	 *
-	 * @param \TYPO3\Flow\Session\SessionInterface $session
+	 * @param \Neos\Flow\Session\SessionInterface $session
 	 * @return boolean
 	 */
 	protected function sessionIsActive($session) {

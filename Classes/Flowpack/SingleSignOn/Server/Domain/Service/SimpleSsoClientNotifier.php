@@ -6,7 +6,7 @@ namespace Flowpack\SingleSignOn\Server\Domain\Service;
  *                                                                               */
 
 use Flowpack\SingleSignOn\Server\Domain\Model\SsoServer;
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 
 /**
  * A simple notification strategy for SSO clients

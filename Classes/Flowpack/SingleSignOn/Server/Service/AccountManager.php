@@ -5,7 +5,7 @@ namespace Flowpack\SingleSignOn\Server\Service;
  * This script belongs to the TYPO3 Flow package "Flowpack.SingleSignOn.Server". *
  *                                                                               */
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 
 /**
  * Server account manager
@@ -20,14 +20,14 @@ class AccountManager {
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Security\Authentication\AuthenticationManagerInterface
+	 * @var \Neos\Flow\Security\Authentication\AuthenticationManagerInterface
 	 */
 	protected $authenticationManager;
 
 	/**
 	 * @Flow\Inject
 	 * @Flow\Transient
-	 * @var \TYPO3\Flow\Session\SessionInterface
+	 * @var \Neos\Flow\Session\SessionInterface
 	 */
 	protected $session;
 
@@ -39,14 +39,14 @@ class AccountManager {
 
 	/**
 	 * The currently impersonated account (NULL if no account is impersonated)
-	 * @var \TYPO3\Flow\Security\Account
+	 * @var \Neos\Flow\Security\Account
 	 */
 	protected $impersonatedAccount;
 
 	/**
 	 * Get the currently active account for any SSO client (for the current session)
 	 *
-	 * @return \TYPO3\Flow\Security\Account
+	 * @return \Neos\Flow\Security\Account
 	 */
 	public function getClientAccount() {
 		if ($this->impersonatedAccount !== NULL) {
@@ -59,7 +59,7 @@ class AccountManager {
 	/**
 	 * Get the currently authenticated account on the SSO server (for the current session)
 	 *
-	 * @return \TYPO3\Flow\Security\Account
+	 * @return \Neos\Flow\Security\Account
 	 */
 	public function getServerAccount() {
 		$account = $this->authenticationManager->getSecurityContext()->getAccount();
@@ -71,10 +71,10 @@ class AccountManager {
 	 *
 	 * Destroys registered client sessions to force re-authentication.
 	 *
-	 * @param \TYPO3\Flow\Security\Account $account
+	 * @param \Neos\Flow\Security\Account $account
 	 * @return void
 	 */
-	public function impersonateAccount(\TYPO3\Flow\Security\Account $account = NULL) {
+	public function impersonateAccount(\Neos\Flow\Security\Account $account = NULL) {
 		if ($this->impersonatedAccount !== $account) {
 			$this->impersonatedAccount = $account;
 
@@ -85,17 +85,17 @@ class AccountManager {
 	}
 
 	/**
-	 * @return \TYPO3\Flow\Security\Account The impersonated account or NULL if no account was impersonated
+	 * @return \Neos\Flow\Security\Account The impersonated account or NULL if no account was impersonated
 	 */
 	public function getImpersonatedAccount() {
 		return $this->impersonatedAccount;
 	}
 
 	/**
-	 * @param \TYPO3\Flow\Security\Account $account The impersonated account
+	 * @param \Neos\Flow\Security\Account $account The impersonated account
 	 * @Flow\Signal
 	 */
-	protected function emitAccountImpersonated(\TYPO3\Flow\Security\Account $account) {}
+	protected function emitAccountImpersonated(\Neos\Flow\Security\Account $account) {}
 
 	/**
 	 * Destroy the SSO session on all registered SSO clients of the current session

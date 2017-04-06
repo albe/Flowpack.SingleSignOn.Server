@@ -7,16 +7,16 @@ namespace Flowpack\SingleSignOn\Server\Tests\Functional;
  *                                                                        */
 
 
-use \TYPO3\Flow\Http\Request;
-use \TYPO3\Flow\Http\Response;
-use \TYPO3\Flow\Http\Uri;
+use \Neos\Flow\Http\Request;
+use \Neos\Flow\Http\Response;
+use \Neos\Flow\Http\Uri;
 
 /**
  * SSO roundtrip test
  *
  * Let's see how much we can test using functional tests.
  */
-class SingleSignOnRoundtripTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
+class SingleSignOnRoundtripTest extends \Neos\Flow\Tests\FunctionalTestCase {
 
 	protected $testableSecurityEnabled = TRUE;
 
@@ -25,7 +25,7 @@ class SingleSignOnRoundtripTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
 	protected static $testablePersistenceEnabled = TRUE;
 
 	/**
-	 * @var \TYPO3\Flow\Security\Cryptography\RsaWalletServiceInterface
+	 * @var \Neos\Flow\Security\Cryptography\RsaWalletServiceInterface
 	 */
 	protected $rsaWalletService;
 
@@ -49,7 +49,7 @@ class SingleSignOnRoundtripTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
 	 */
 	public function setUp() {
 		parent::setUp();
-		$this->rsaWalletService = $this->objectManager->get('TYPO3\Flow\Security\Cryptography\RsaWalletServiceInterface');
+		$this->rsaWalletService = $this->objectManager->get('Neos\Flow\Security\Cryptography\RsaWalletServiceInterface');
 
 		$privateKeyString = file_get_contents(__DIR__ . '/Fixtures/ssoserver.key');
 		$this->rsaWalletService->registerKeyPairFromPrivateKeyString($privateKeyString);
@@ -96,7 +96,7 @@ class SingleSignOnRoundtripTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
 	public function ssoEndpointWithAuthenticatedAccountRedirectsToCallbackUri() {
 		$this->markTestIncomplete('Broke by some session change');
 
-		$account = new \TYPO3\Flow\Security\Account();
+		$account = new \Neos\Flow\Security\Account();
 		$account->setAccountIdentifier('testuser');
 		$account->setRoles(array('User'));
 		$account->setAuthenticationProviderName('SingleSignOn');
@@ -120,7 +120,7 @@ class SingleSignOnRoundtripTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
 
 		$redirectUri = new Uri($response->getHeader('Location'));
 
-		$route = new \TYPO3\Flow\Mvc\Routing\Route();
+		$route = new \Neos\Flow\Mvc\Routing\Route();
 		$route->setName('Functional Test - SSO Endpoint');
 		$route->setUriPattern('test/sso/authentication(/{@action})');
 		$route->setDefaults(array(
@@ -163,7 +163,7 @@ class SingleSignOnRoundtripTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
 		$callbackUri = $this->serverSsoServer->buildCallbackRedirectUri($this->serverSsoClient, $accessToken, 'http://ssoinstance/test/secured');
 
 		$callbackRequest = Request::create($callbackUri);
-		$callbackActionRequest = new \TYPO3\Flow\Mvc\ActionRequest($callbackRequest);
+		$callbackActionRequest = new \Neos\Flow\Mvc\ActionRequest($callbackRequest);
 
 		$singleSignOnToken = new \Flowpack\SingleSignOn\Client\Security\SingleSignOnToken();
 		$singleSignOnToken->updateCredentials($callbackActionRequest);

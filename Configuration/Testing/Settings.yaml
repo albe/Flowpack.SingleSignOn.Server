@@ -1,34 +1,30 @@
+
 Flowpack:
   SingleSignOn:
     Server:
       server:
-        # Fixtures for functional tests
-        keyPairFingerprint: 'bb5abb57faa122cc031e3c904db3d751'
+        keyPairFingerprint: bb5abb57faa122cc031e3c904db3d751
         serviceBaseUri: 'http://ssoserver/test/sso'
       log:
-        backend: TYPO3\Flow\Log\Backend\NullBackend
-
+        backend: Neos\Flow\Log\Backend\NullBackend
     Client:
       client:
-        # Fixtures for functional tests
         serviceBaseUri: 'http://ssoclient/sso'
-        publicKeyFingerprint: 'bb45dfda9f461c22cfdd6bbb0a252d8e'
+        publicKeyFingerprint: bb45dfda9f461c22cfdd6bbb0a252d8e
       server:
         TestServer:
-          # Fixtures for functional tests
-          publicKeyFingerprint: 'bb5abb57faa122cc031e3c904db3d751'
+          publicKeyFingerprint: bb5abb57faa122cc031e3c904db3d751
           serviceBaseUri: 'http://ssoserver/test/sso'
-
-TYPO3:
+Neos:
   Flow:
     security:
       cryptography:
         RSAWalletServicePHP:
-          keystorePath: %FLOW_PATH_DATA%Temporary/Testing/RsaWalletData
+          keystorePath: '%FLOW_PATH_DATA%Temporary/Testing/RsaWalletData'
       authentication:
         providers:
           DefaultProvider:
             provider: PersistedUsernamePasswordProvider
             entryPoint: WebRedirect
             entryPointOptions:
-              uri: 'login'
+              uri: login

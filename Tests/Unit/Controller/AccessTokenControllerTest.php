@@ -11,7 +11,7 @@ use \Mockery as m;
 /**
  * Unit test for AccessTokenController
  */
-class AccessTokenControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
+class AccessTokenControllerTest extends \Neos\Flow\Tests\UnitTestCase {
 
 	/**
 	 * @test
@@ -19,13 +19,13 @@ class AccessTokenControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function redeemActionWithInvalidMethodRespondsWith405() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\AccessTokenController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
-		$mockRequest = m::mock('TYPO3\Flow\Mvc\ActionRequest', array(
+		$mockRequest = m::mock('Neos\Flow\Mvc\ActionRequest', array(
 			'getHttpRequest->getMethod' => 'GET'
 		));
 		$this->inject($controller, 'request', $mockRequest);
-		$this->inject($controller, 'view', m::mock('TYPO3\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
+		$this->inject($controller, 'view', m::mock('Neos\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
 
 		$controller->redeemAction('invalid-accesstoken');
 
@@ -38,9 +38,9 @@ class AccessTokenControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function redeemActionWithInvalidAccessTokenRespondsWith404() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\AccessTokenController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
-		$mockRequest = m::mock('TYPO3\Flow\Mvc\ActionRequest', array(
+		$mockRequest = m::mock('Neos\Flow\Mvc\ActionRequest', array(
 			'getHttpRequest->getMethod' => 'POST'
 		));
 		$this->inject($controller, 'request', $mockRequest);
@@ -48,7 +48,7 @@ class AccessTokenControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 			'findByIdentifier' => NULL
 		));
 		$this->inject($controller, 'accessTokenRepository', $mockAccessTokenRepository);
-		$this->inject($controller, 'view', m::mock('TYPO3\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
+		$this->inject($controller, 'view', m::mock('Neos\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
 
 		$controller->redeemAction('invalid-accesstoken');
 
@@ -61,13 +61,13 @@ class AccessTokenControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function redeemActionWithValidAccessTokenRemovesAccessToken() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\AccessTokenController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
-		$mockRequest = m::mock('TYPO3\Flow\Mvc\ActionRequest', array(
+		$mockRequest = m::mock('Neos\Flow\Mvc\ActionRequest', array(
 			'getHttpRequest->getMethod' => 'POST'
 		));
 		$this->inject($controller, 'request', $mockRequest);
-		$mockAccount = m::mock('TYPO3\Flow\Security\Account');
+		$mockAccount = m::mock('Neos\Flow\Security\Account');
 		$mockSsoClient = m::mock('Flowpack\SingleSignOn\Server\Domain\Model\SsoClient');
 		$mockAccessToken = m::mock('Flowpack\SingleSignOn\Server\Domain\Model\AccessToken', array(
 			'getSessionId' => 'test-sessionid',
@@ -82,14 +82,14 @@ class AccessTokenControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 			'getAccountData' => array()
 		));
 		$this->inject($controller, 'clientAccountMapper', $mockClientAccountMapper);
-		$mockSessionManager = m::mock('TYPO3\Flow\Session\SessionManagerInterface');
-		$mockSession = m::mock('TYPO3\Flow\Session\SessionInterface', array(
+		$mockSessionManager = m::mock('Neos\Flow\Session\SessionManagerInterface');
+		$mockSession = m::mock('Neos\Flow\Session\SessionInterface', array(
 			'isStarted' => TRUE
 		));
 		$mockSessionManager->shouldReceive('getSession')->with('test-sessionid')->andReturn($mockSession);
 		$this->inject($controller, 'sessionManager', $mockSessionManager);
-		$this->inject($controller, 'uriBuilder', m::mock('TYPO3\Flow\Mvc\Routing\UriBuilder')->shouldIgnoreMissing());
-		$this->inject($controller, 'view', m::mock('TYPO3\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
+		$this->inject($controller, 'uriBuilder', m::mock('Neos\Flow\Mvc\Routing\UriBuilder')->shouldIgnoreMissing());
+		$this->inject($controller, 'view', m::mock('Neos\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
 		$mockSingleSignOnSessionManager= m::mock('Flowpack\SingleSignOn\Server\Session\SsoSessionManager', array(
 			'registerSsoClient' => NULL
 		));
@@ -106,13 +106,13 @@ class AccessTokenControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function redeemActionWithValidAccessTokenMapsAccountData() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\AccessTokenController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
-		$mockRequest = m::mock('TYPO3\Flow\Mvc\ActionRequest', array(
+		$mockRequest = m::mock('Neos\Flow\Mvc\ActionRequest', array(
 			'getHttpRequest->getMethod' => 'POST'
 		));
 		$this->inject($controller, 'request', $mockRequest);
-		$mockAccount = m::mock('TYPO3\Flow\Security\Account');
+		$mockAccount = m::mock('Neos\Flow\Security\Account');
 		$mockSsoClient = m::mock('Flowpack\SingleSignOn\Server\Domain\Model\SsoClient');
 		$mockAccessToken = m::mock('Flowpack\SingleSignOn\Server\Domain\Model\AccessToken', array(
 			'getSessionId' => 'test-sessionid',
@@ -136,14 +136,14 @@ class AccessTokenControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 			'registerSsoClient' => NULL
 		));
 		$this->inject($controller, 'singleSignOnSessionManager', $mockSingleSignOnSessionManager);
-		$mockSessionManager = m::mock('TYPO3\Flow\Session\SessionManagerInterface');
-		$mockSession = m::mock('TYPO3\Flow\Session\SessionInterface', array(
+		$mockSessionManager = m::mock('Neos\Flow\Session\SessionManagerInterface');
+		$mockSession = m::mock('Neos\Flow\Session\SessionInterface', array(
 			'isStarted' => TRUE
 		));
 		$mockSessionManager->shouldReceive('getSession')->with('test-sessionid')->andReturn($mockSession);
 		$this->inject($controller, 'sessionManager', $mockSessionManager);
-		$this->inject($controller, 'uriBuilder', m::mock('TYPO3\Flow\Mvc\Routing\UriBuilder')->shouldIgnoreMissing());
-		$mockView = m::mock('TYPO3\Flow\Mvc\View\ViewInterface');
+		$this->inject($controller, 'uriBuilder', m::mock('Neos\Flow\Mvc\Routing\UriBuilder')->shouldIgnoreMissing());
+		$mockView = m::mock('Neos\Flow\Mvc\View\ViewInterface');
 		$this->inject($controller, 'view', $mockView);
 
 		$mockView->shouldReceive('assign')->with('value',
@@ -159,13 +159,13 @@ class AccessTokenControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function redeemActionWithInactiveSessionRespondsWith403() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\AccessTokenController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
-		$mockRequest = m::mock('TYPO3\Flow\Mvc\ActionRequest', array(
+		$mockRequest = m::mock('Neos\Flow\Mvc\ActionRequest', array(
 			'getHttpRequest->getMethod' => 'POST'
 		));
 		$this->inject($controller, 'request', $mockRequest);
-		$mockAccount = m::mock('TYPO3\Flow\Security\Account');
+		$mockAccount = m::mock('Neos\Flow\Security\Account');
 		$mockSsoClient = m::mock('Flowpack\SingleSignOn\Server\Domain\Model\SsoClient');
 		$mockAccessToken = m::mock('Flowpack\SingleSignOn\Server\Domain\Model\AccessToken', array(
 			'getSessionId' => 'invalid-sessionid',
@@ -177,11 +177,11 @@ class AccessTokenControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		));
 		$this->inject($controller, 'accessTokenRepository', $mockAccessTokenRepository);
 		$this->inject($controller, 'clientAccountMapper', m::mock('Flowpack\SingleSignOn\Server\Service\ClientAccountMapperInterface'));
-		$mockSessionManager = m::mock('TYPO3\Flow\Session\SessionManagerInterface');
+		$mockSessionManager = m::mock('Neos\Flow\Session\SessionManagerInterface');
 		$mockSessionManager->shouldReceive('getSession')->with('invalid-sessionid')->andReturn(NULL);
 		$this->inject($controller, 'sessionManager', $mockSessionManager);
-		$this->inject($controller, 'uriBuilder', m::mock('TYPO3\Flow\Mvc\Routing\UriBuilder')->shouldIgnoreMissing());
-		$this->inject($controller, 'view', m::mock('TYPO3\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
+		$this->inject($controller, 'uriBuilder', m::mock('Neos\Flow\Mvc\Routing\UriBuilder')->shouldIgnoreMissing());
+		$this->inject($controller, 'view', m::mock('Neos\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
 
 		$controller->redeemAction('valid-accesstoken');
 

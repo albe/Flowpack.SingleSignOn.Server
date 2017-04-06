@@ -6,23 +6,23 @@ namespace Flowpack\SingleSignOn\Server\Tests\Unit\Service;
  *                                                                        *
  *                                                                        */
 
-use \TYPO3\Flow\Http\Request;
-use \TYPO3\Flow\Http\Response;
-use \TYPO3\Flow\Http\Uri;
+use \Neos\Flow\Http\Request;
+use \Neos\Flow\Http\Response;
+use \Neos\Flow\Http\Uri;
 
 /**
  *
  */
-class SimpleClientAccountMapperTest extends \TYPO3\Flow\Tests\UnitTestCase {
+class SimpleClientAccountMapperTest extends \Neos\Flow\Tests\UnitTestCase {
 
 	/**
 	 * @test
 	 */
 	public function getAccountDataMapsAccountInformation() {
 		$ssoClient = new \Flowpack\SingleSignOn\Server\Domain\Model\SsoClient();
-		$account = new \TYPO3\Flow\Security\Account();
+		$account = new \Neos\Flow\Security\Account();
 		$account->setAccountIdentifier('jdoe');
-		$account->setRoles(array(new \TYPO3\Flow\Security\Policy\Role('Administrator')));
+		$account->setRoles(array(new \Neos\Flow\Security\Policy\Role('Administrator')));
 
 		$mapper = new \Flowpack\SingleSignOn\Server\Service\SimpleClientAccountMapper();
 		$data = $mapper->getAccountData($ssoClient, $account);
@@ -39,9 +39,9 @@ class SimpleClientAccountMapperTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 */
 	public function getAccountDataMapsPublicPartyProperties() {
 		$ssoClient = new \Flowpack\SingleSignOn\Server\Domain\Model\SsoClient();
-		$account = new \TYPO3\Flow\Security\Account();
+		$account = new \Neos\Flow\Security\Account();
 		$account->setAccountIdentifier('jdoe');
-		$account->setRoles(array(new \TYPO3\Flow\Security\Policy\Role('Administrator')));
+		$account->setRoles(array(new \Neos\Flow\Security\Policy\Role('Administrator')));
 
 		$party = new \TYPO3\Party\Domain\Model\Person();
 		$party->setName(new \TYPO3\Party\Domain\Model\PersonName('', 'John', '', 'Doe'));
@@ -61,9 +61,9 @@ class SimpleClientAccountMapperTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 */
 	public function getAccountDataExposesTypeIfConfigured() {
 		$ssoClient = new \Flowpack\SingleSignOn\Server\Domain\Model\SsoClient();
-		$account = new \TYPO3\Flow\Security\Account();
+		$account = new \Neos\Flow\Security\Account();
 		$account->setAccountIdentifier('jdoe');
-		$account->setRoles(array(new \TYPO3\Flow\Security\Policy\Role('Administrator')));
+		$account->setRoles(array(new \Neos\Flow\Security\Policy\Role('Administrator')));
 
 		$party = new \TYPO3\Party\Domain\Model\Person();
 		$party->setName(new \TYPO3\Party\Domain\Model\PersonName('', 'John', '', 'Doe'));

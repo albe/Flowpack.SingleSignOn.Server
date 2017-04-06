@@ -5,8 +5,8 @@ namespace Flowpack\SingleSignOn\Server\Aspect;
  * This script belongs to the TYPO3 Flow package "Flowpack.SingleSignOn.Server". *
  *                                                                               */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Aop\JoinPointInterface;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Aop\JoinPointInterface;
 
 /**
  *
@@ -24,7 +24,7 @@ class SynchronizeClientSessionsAspect {
 	/**
 	 * Destroys client sessions if the server session gets a new id
 	 *
-	 * @Flow\Before("within(TYPO3\Flow\Session\SessionInterface) && method(.*->renewId())")
+	 * @Flow\Before("within(Neos\Flow\Session\SessionInterface) && method(.*->renewId())")
 	 * @param JoinPointInterface $joinPoint The current joinpoint
 	 */
 	public function destroyClientSessionsOnRenewId(JoinPointInterface $joinPoint) {

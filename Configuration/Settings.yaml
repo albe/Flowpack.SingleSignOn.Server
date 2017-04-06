@@ -5,48 +5,39 @@
 Flowpack:
   SingleSignOn:
     Server:
-
-      # Server configuration
       server:
-        # The service base URI for this server
         serviceBaseUri: ''
-        # Mandatory key pair uuid (fingerprint) for the SSO server
         keyPairFingerprint: ''
-
       log:
-        backend: TYPO3\Flow\Log\Backend\FileBackend
+        backend: Neos\Flow\Log\Backend\FileBackend
         backendOptions:
-          logFileURL: %FLOW_PATH_DATA%Logs/SingleSignOn_Server.log
-          createParentDirectories: TRUE
-          severityThreshold: %LOG_WARN%
+          logFileURL: '%FLOW_PATH_DATA%Logs/SingleSignOn_Server.log'
+          createParentDirectories: true
+          severityThreshold: '%LOG_WARN%'
           maximumLogFileSize: 10485760
           logFilesToKeep: 1
-          logMessageOrigin: FALSE
-
-        # Enable logging of request signing (all signed requests)
-        logRequestSigning: FALSE
-
+          logMessageOrigin: false
+        logRequestSigning: false
       accountMapper:
-        configuration: ~
-
-TYPO3:
+        configuration: null
+Neos:
   Flow:
     security:
       firewall:
         filters:
           ssoServerSignedRequests:
-            patternType: 'Flowpack\SingleSignOn\Client\Security\RequestPattern\ConjunctionPattern'
+            patternType: Flowpack\SingleSignOn\Client\Security\RequestPattern\ConjunctionPattern
             patternValue:
               patterns:
                 -
                   patternType: ControllerObjectName
-                  patternValue: 'Flowpack\SingleSignOn\Server\Controller\(AccessToken|Session)Controller'
+                  patternValue: Flowpack\SingleSignOn\Server\Controller\(AccessToken|Session)Controller
                 -
-                  patternType: 'Flowpack\SingleSignOn\Client\Security\RequestPattern\SignedRequestPattern'
+                  patternType: Flowpack\SingleSignOn\Client\Security\RequestPattern\SignedRequestPattern
                   patternValue:
-                    resolverType: 'Flowpack\SingleSignOn\Server\Security\RequestPattern\SsoClientPublicKeyResolver'
+                    resolverType: Flowpack\SingleSignOn\Server\Security\RequestPattern\SsoClientPublicKeyResolver
             interceptor: AccessDeny
-
     object:
       excludeClasses:
-       'mockery.mockery' : ['.*']
+        mockery.mockery:
+          - '.*'

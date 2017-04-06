@@ -11,7 +11,7 @@ use \Mockery as m;
 /**
  * Unit test for SessionController
  */
-class SessionControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
+class SessionControllerTest extends \Neos\Flow\Tests\UnitTestCase {
 
 	/**
 	 * @test
@@ -19,14 +19,14 @@ class SessionControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function destroySessionWithExistingSessionDestroysSession() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\SessionController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
-		$mockRequest = m::mock('TYPO3\Flow\Mvc\ActionRequest', array(
+		$mockRequest = m::mock('Neos\Flow\Mvc\ActionRequest', array(
 			'getHttpRequest->getMethod' => 'DELETE'
 		));
 		$this->inject($controller, 'request', $mockRequest);
-		$this->inject($controller, 'view', m::mock('TYPO3\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
-		$mockSessionManager = m::mock('TYPO3\Flow\Session\SessionManagerInterface');
+		$this->inject($controller, 'view', m::mock('Neos\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
+		$mockSessionManager = m::mock('Neos\Flow\Session\SessionManagerInterface');
 		$this->inject($controller, 'sessionManager', $mockSessionManager);
 		$mockSsoServer = m::mock('Flowpack\SingleSignOn\Server\Domain\Model\SsoServer');
 		$mockSsoServerFactory = m::mock('Flowpack\SingleSignOn\Server\Domain\Factory\SsoServerFactory', array(
@@ -42,7 +42,7 @@ class SessionControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		));
 		$this->inject($controller, 'ssoClientNotifier', $mockSsoClientNotifier);
 
-		$mockSession = m::mock('TYPO3\Flow\Session\Session')->shouldIgnoreMissing();
+		$mockSession = m::mock('Neos\Flow\Session\Session')->shouldIgnoreMissing();
 		$mockSessionManager->shouldReceive('getSession')->with('valid-session-id')->andReturn($mockSession);
 
 		$mockSession->shouldReceive('destroy')->once();
@@ -56,14 +56,14 @@ class SessionControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function destroySessionWithExistingSessionRespondsWith200() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\SessionController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
-		$mockRequest = m::mock('TYPO3\Flow\Mvc\ActionRequest', array(
+		$mockRequest = m::mock('Neos\Flow\Mvc\ActionRequest', array(
 			'getHttpRequest->getMethod' => 'DELETE'
 		));
 		$this->inject($controller, 'request', $mockRequest);
-		$this->inject($controller, 'view', m::mock('TYPO3\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
-		$mockSessionManager = m::mock('TYPO3\Flow\Session\SessionManagerInterface');
+		$this->inject($controller, 'view', m::mock('Neos\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
+		$mockSessionManager = m::mock('Neos\Flow\Session\SessionManagerInterface');
 		$this->inject($controller, 'sessionManager', $mockSessionManager);
 		$mockSsoServer = m::mock('Flowpack\SingleSignOn\Server\Domain\Model\SsoServer');
 		$mockSsoServerFactory = m::mock('Flowpack\SingleSignOn\Server\Domain\Factory\SsoServerFactory', array(
@@ -79,7 +79,7 @@ class SessionControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		));
 		$this->inject($controller, 'ssoClientNotifier', $mockSsoClientNotifier);
 
-		$mockSession = m::mock('TYPO3\Flow\Session\Session')->shouldIgnoreMissing();
+		$mockSession = m::mock('Neos\Flow\Session\Session')->shouldIgnoreMissing();
 		$mockSessionManager->shouldReceive('getSession')->with('valid-session-id')->andReturn($mockSession);
 
 		$controller->destroyAction('valid-session-id');
@@ -93,14 +93,14 @@ class SessionControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function destroySessionWithUnknownSessionRespondsWith404() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\SessionController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
-		$mockRequest = m::mock('TYPO3\Flow\Mvc\ActionRequest', array(
+		$mockRequest = m::mock('Neos\Flow\Mvc\ActionRequest', array(
 			'getHttpRequest->getMethod' => 'DELETE'
 		));
 		$this->inject($controller, 'request', $mockRequest);
-		$this->inject($controller, 'view', m::mock('TYPO3\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
-		$mockSessionManager = m::mock('TYPO3\Flow\Session\SessionManagerInterface');
+		$this->inject($controller, 'view', m::mock('Neos\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
+		$mockSessionManager = m::mock('Neos\Flow\Session\SessionManagerInterface');
 		$this->inject($controller, 'sessionManager', $mockSessionManager);
 
 		$mockSessionManager->shouldReceive('getSession')->with('invalid-session-id')->andReturn(NULL);
@@ -116,13 +116,13 @@ class SessionControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function destroyActionWithInvalidMethodRespondsWith405AndAllowedMethod() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\SessionController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
-		$mockRequest = m::mock('TYPO3\Flow\Mvc\ActionRequest', array(
+		$mockRequest = m::mock('Neos\Flow\Mvc\ActionRequest', array(
 			'getHttpRequest->getMethod' => 'GET'
 		));
 		$this->inject($controller, 'request', $mockRequest);
-		$this->inject($controller, 'view', m::mock('TYPO3\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
+		$this->inject($controller, 'view', m::mock('Neos\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
 
 		$controller->destroyAction('test-session-id');
 
@@ -136,15 +136,15 @@ class SessionControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function touchActionWithPostAndValidSessionIdRespondsWith200() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\SessionController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
-		$mockRequest = m::mock('TYPO3\Flow\Mvc\ActionRequest', array(
+		$mockRequest = m::mock('Neos\Flow\Mvc\ActionRequest', array(
 			'getHttpRequest->getMethod' => 'POST'
 		));
 		$this->inject($controller, 'request', $mockRequest);
-		$this->inject($controller, 'view', m::mock('TYPO3\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
-		$mockSessionManager = m::mock('TYPO3\Flow\Session\SessionManagerInterface');
-		$mockSession = m::mock('TYPO3\Flow\Session\SessionInterface')->shouldIgnoreMissing();
+		$this->inject($controller, 'view', m::mock('Neos\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
+		$mockSessionManager = m::mock('Neos\Flow\Session\SessionManagerInterface');
+		$mockSession = m::mock('Neos\Flow\Session\SessionInterface')->shouldIgnoreMissing();
 		$mockSessionManager->shouldReceive('getSession')->with('valid-session-id')->andReturn($mockSession);
 		$this->inject($controller, 'sessionManager', $mockSessionManager);
 
@@ -159,15 +159,15 @@ class SessionControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function touchActionWithPostAndValidSessionIdTouchesSession() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\SessionController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
-		$mockRequest = m::mock('TYPO3\Flow\Mvc\ActionRequest', array(
+		$mockRequest = m::mock('Neos\Flow\Mvc\ActionRequest', array(
 			'getHttpRequest->getMethod' => 'POST'
 		));
 		$this->inject($controller, 'request', $mockRequest);
-		$this->inject($controller, 'view', m::mock('TYPO3\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
-		$mockSessionManager = m::mock('TYPO3\Flow\Session\SessionManagerInterface');
-		$mockSession = m::mock('TYPO3\Flow\Session\SessionInterface')->shouldIgnoreMissing();
+		$this->inject($controller, 'view', m::mock('Neos\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
+		$mockSessionManager = m::mock('Neos\Flow\Session\SessionManagerInterface');
+		$mockSession = m::mock('Neos\Flow\Session\SessionInterface')->shouldIgnoreMissing();
 		$mockSessionManager->shouldReceive('getSession')->with('valid-session-id')->andReturn($mockSession);
 		$this->inject($controller, 'sessionManager', $mockSessionManager);
 
@@ -182,15 +182,15 @@ class SessionControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function touchActionWithPostAndInvalidSessionIdRespondsWith404AndJsonMessage() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\SessionController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
-		$mockRequest = m::mock('TYPO3\Flow\Mvc\ActionRequest', array(
+		$mockRequest = m::mock('Neos\Flow\Mvc\ActionRequest', array(
 			'getHttpRequest->getMethod' => 'POST'
 		));
 		$this->inject($controller, 'request', $mockRequest);
-		$mockView = m::mock('TYPO3\Flow\Mvc\View\ViewInterface');
+		$mockView = m::mock('Neos\Flow\Mvc\View\ViewInterface');
 		$this->inject($controller, 'view', $mockView);
-		$mockSessionManager = m::mock('TYPO3\Flow\Session\SessionManagerInterface');
+		$mockSessionManager = m::mock('Neos\Flow\Session\SessionManagerInterface');
 		$mockSessionManager->shouldReceive('getSession')->with('invalid-session-id')->andReturn(NULL);
 		$this->inject($controller, 'sessionManager', $mockSessionManager);
 
@@ -209,13 +209,13 @@ class SessionControllerTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function touchActionWithInvalidMethodRespondsWith405AndAllowedMethod() {
 		$controller = new \Flowpack\SingleSignOn\Server\Controller\SessionController();
 
-		$response = new \TYPO3\Flow\Http\Response();
+		$response = new \Neos\Flow\Http\Response();
 		$this->inject($controller, 'response', $response);
-		$mockRequest = m::mock('TYPO3\Flow\Mvc\ActionRequest', array(
+		$mockRequest = m::mock('Neos\Flow\Mvc\ActionRequest', array(
 			'getHttpRequest->getMethod' => 'GET'
 		));
 		$this->inject($controller, 'request', $mockRequest);
-		$this->inject($controller, 'view', m::mock('TYPO3\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
+		$this->inject($controller, 'view', m::mock('Neos\Flow\Mvc\View\ViewInterface')->shouldIgnoreMissing());
 
 		$controller->touchAction('test-session-id');
 

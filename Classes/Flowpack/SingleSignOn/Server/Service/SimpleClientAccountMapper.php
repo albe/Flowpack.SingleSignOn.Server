@@ -5,7 +5,7 @@ namespace Flowpack\SingleSignOn\Server\Service;
  * This script belongs to the TYPO3 Flow package "Flowpack.SingleSignOn.Server". *
  *                                                                               */
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 
 /**
  * A simple instance account mapper that will map all (safe) properties of
@@ -18,7 +18,7 @@ class SimpleClientAccountMapper implements ClientAccountMapperInterface {
 	/**
 	 * Account serialization configuration
 	 *
-	 * @see \TYPO3\Flow\Mvc\View\JsonView for configuration options
+	 * @see \Neos\Flow\Mvc\View\JsonView for configuration options
 	 * @var array
 	 */
 	protected $configuration = NULL;
@@ -27,10 +27,10 @@ class SimpleClientAccountMapper implements ClientAccountMapperInterface {
 	 * Map the given account as account data for an instance
 	 *
 	 * @param \Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient
-	 * @param \TYPO3\Flow\Security\Account $account
+	 * @param \Neos\Flow\Security\Account $account
 	 * @return array
 	 */
-	public function getAccountData(\Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient, \TYPO3\Flow\Security\Account $account) {
+	public function getAccountData(\Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient, \Neos\Flow\Security\Account $account) {
 		if ($this->configuration !== NULL) {
 			$configuration = $this->configuration;
 		} else {
@@ -88,14 +88,14 @@ class SimpleClientAccountMapper implements ClientAccountMapperInterface {
 		if ($object instanceof \DateTime) {
 			return $object->format('Y-m-d\TH:i:s');
 		} else {
-			$propertyNames = \TYPO3\Flow\Reflection\ObjectAccess::getGettablePropertyNames($object);
+			$propertyNames = \Neos\Flow\Reflection\ObjectAccess::getGettablePropertyNames($object);
 
 			$propertiesToRender = array();
 			foreach ($propertyNames as $propertyName) {
 				if (isset($configuration['_only']) && is_array($configuration['_only']) && !in_array($propertyName, $configuration['_only'])) continue;
 				if (isset($configuration['_exclude']) && is_array($configuration['_exclude']) && in_array($propertyName, $configuration['_exclude'])) continue;
 
-				$propertyValue = \TYPO3\Flow\Reflection\ObjectAccess::getProperty($object, $propertyName);
+				$propertyValue = \Neos\Flow\Reflection\ObjectAccess::getProperty($object, $propertyName);
 
 				if (!is_array($propertyValue) && !is_object($propertyValue)) {
 					$propertiesToRender[$propertyName] = $propertyValue;
@@ -122,10 +122,10 @@ class SimpleClientAccountMapper implements ClientAccountMapperInterface {
 	 * Get a default configuration depending on the type of party
 	 *
 	 * @param \Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient
-	 * @param \TYPO3\Flow\Security\Account $account
+	 * @param \Neos\Flow\Security\Account $account
 	 * @return array
 	 */
-	protected function getDefaultConfiguration(\Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient, \TYPO3\Flow\Security\Account $account) {
+	protected function getDefaultConfiguration(\Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient, \Neos\Flow\Security\Account $account) {
 		if ($account->getParty() instanceof \TYPO3\Party\Domain\Model\Person) {
 			return array(
 				'party' => array(

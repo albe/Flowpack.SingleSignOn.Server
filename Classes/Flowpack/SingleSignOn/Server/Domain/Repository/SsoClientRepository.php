@@ -6,8 +6,8 @@ namespace Flowpack\SingleSignOn\Server\Domain\Repository;
  *                                                                        *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Persistence\Repository;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Persistence\Repository;
 
 /**
  * A repository for SSO Clients

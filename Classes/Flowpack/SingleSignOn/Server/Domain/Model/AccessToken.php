@@ -5,8 +5,8 @@ namespace Flowpack\SingleSignOn\Server\Domain\Model;
  * This script belongs to the TYPO3 Flow package "Flowpack.SingleSignOn.Server". *
  *                                                                               */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Utility\Algorithms;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Utility\Algorithms;
 
 /**
  * SSO Access Token
@@ -45,7 +45,7 @@ class AccessToken {
 	protected $ssoClient;
 
 	/**
-	 * @var \TYPO3\Flow\Security\Account
+	 * @var \Neos\Flow\Security\Account
 	 */
 	protected $account;
 
@@ -118,14 +118,14 @@ class AccessToken {
 	}
 
 	/**
-	 * @param \TYPO3\Flow\Security\Account $account
+	 * @param \Neos\Flow\Security\Account $account
 	 */
 	public function setAccount($account) {
 		$this->account = $account;
 	}
 
 	/**
-	 * @return \TYPO3\Flow\Security\Account
+	 * @return \Neos\Flow\Security\Account
 	 */
 	public function getAccount() {
 		return $this->account;

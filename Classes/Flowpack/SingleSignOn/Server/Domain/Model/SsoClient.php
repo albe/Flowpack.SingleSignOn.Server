@@ -5,10 +5,10 @@ namespace Flowpack\SingleSignOn\Server\Domain\Model;
  * This script belongs to the TYPO3 Flow package "Flowpack.SingleSignOn.Server". *
  *                                                                               */
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use Doctrine\ORM\Mapping as ORM;
 
-use TYPO3\Flow\Http\Uri;
+use Neos\Flow\Http\Uri;
 use Flowpack\SingleSignOn\Server\Exception;
 
 /**
@@ -37,7 +37,7 @@ class SsoClient {
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Http\Client\CurlEngine
+	 * @var \Neos\Flow\Http\Client\CurlEngine
 	 */
 	protected $requestEngine;
 
@@ -81,12 +81,12 @@ class SsoClient {
 	 *
 	 * @param \Flowpack\SingleSignOn\Server\Domain\Model\SsoServer $ssoServer
 	 * @param string $sessionId
-	 * @return \TYPO3\Flow\Http\Request
+	 * @return \Neos\Flow\Http\Request
 	 */
 	public function buildDestroySessionRequest(SsoServer $ssoServer, $sessionId) {
 		$serviceUri = new Uri(rtrim($this->serviceBaseUri, '/') . '/session/' . urlencode($sessionId) . '/destroy');
 		$serviceUri->setQuery(http_build_query(array('serverIdentifier' => $ssoServer->getServiceBaseUri())));
-		$request = \TYPO3\Flow\Http\Request::create($serviceUri, 'DELETE');
+		$request = \Neos\Flow\Http\Request::create($serviceUri, 'DELETE');
 		$request->setContent('');
 
 		return $this->requestSigner->signRequest($request, $ssoServer->getKeyPairFingerprint(), $ssoServer->getKeyPairFingerprint());
