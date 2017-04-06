@@ -43,8 +43,8 @@ class SimpleClientAccountMapperTest extends \Neos\Flow\Tests\UnitTestCase {
 		$account->setAccountIdentifier('jdoe');
 		$account->setRoles(array(new \Neos\Flow\Security\Policy\Role('Administrator')));
 
-		$party = new \TYPO3\Party\Domain\Model\Person();
-		$party->setName(new \TYPO3\Party\Domain\Model\PersonName('', 'John', '', 'Doe'));
+		$party = new \Neos\Party\Domain\Model\Person();
+		$party->setName(new \Neos\Party\Domain\Model\PersonName('', 'John', '', 'Doe'));
 		$account->setParty($party);
 
 		$mapper = new \Flowpack\SingleSignOn\Server\Service\SimpleClientAccountMapper();
@@ -65,8 +65,8 @@ class SimpleClientAccountMapperTest extends \Neos\Flow\Tests\UnitTestCase {
 		$account->setAccountIdentifier('jdoe');
 		$account->setRoles(array(new \Neos\Flow\Security\Policy\Role('Administrator')));
 
-		$party = new \TYPO3\Party\Domain\Model\Person();
-		$party->setName(new \TYPO3\Party\Domain\Model\PersonName('', 'John', '', 'Doe'));
+		$party = new \Neos\Party\Domain\Model\Person();
+		$party->setName(new \Neos\Party\Domain\Model\PersonName('', 'John', '', 'Doe'));
 		$account->setParty($party);
 
 		$mapper = new \Flowpack\SingleSignOn\Server\Service\SimpleClientAccountMapper();
@@ -77,7 +77,7 @@ class SimpleClientAccountMapperTest extends \Neos\Flow\Tests\UnitTestCase {
 
 		$this->assertArrayHasKey('party', $data);
 		$this->assertArrayHasKey('__type', $data['party']);
-		$this->assertEquals('TYPO3\Party\Domain\Model\Person', $data['party']['__type']);
+		$this->assertEquals('Neos\Party\Domain\Model\Person', $data['party']['__type']);
 	}
 
 }

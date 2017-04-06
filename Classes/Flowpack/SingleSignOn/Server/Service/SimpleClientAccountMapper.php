@@ -126,7 +126,7 @@ class SimpleClientAccountMapper implements ClientAccountMapperInterface {
 	 * @return array
 	 */
 	protected function getDefaultConfiguration(\Flowpack\SingleSignOn\Server\Domain\Model\SsoClient $ssoClient, \Neos\Flow\Security\Account $account) {
-		if ($account->getParty() instanceof \TYPO3\Party\Domain\Model\Person) {
+		if ($account->getParty() instanceof \Neos\Party\Domain\Model\Person) {
 			return array(
 				'party' => array(
 					'_exposeType' => TRUE,
